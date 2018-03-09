@@ -1,9 +1,0 @@
-{
-  "prefix": "mk!",
-  "welcomeMessageOn": "false",
-  "welcomeMessageChannel": "bot-log",
-  "leaveMessageOn": "false",
-  "leaveMessageChannel": "bot-log",
-  "levelUpMessageOn": "false",
-  "systemNoticeChannel": "bot-log"
-}

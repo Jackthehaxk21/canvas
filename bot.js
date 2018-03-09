@@ -1,4 +1,9 @@
 const webHandler = require('./web.js');
+
+const http = require('http')
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 250000); 
 //KEEP BOT WEBSITE RUNNING
 /////////////////////////////
 webHandler.run(); ////////  
