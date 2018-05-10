@@ -13,6 +13,36 @@ app.use(express.static('public'));
 app.get("/", function (req, response) {
   response.status(200).send('Ok')
 });
+    
+app.get("/fusioncraft/social*", async function (req, response) {
+  const url = req.query.url
+  const name = req.query.name
+  const getProfile = async function(user, person) {
+        const { Canvas } = require('canvas-constructor');
+        const snek = require('snekfetch');
+        const { resolve, join } = require('path');
+        const fsn = require('fs-nextra');
+        const plate = await fsn.readFile('./Finished Card.png');
+        const png = person.replace(/\.(gif|jpg|png|jpeg)\?size=2048/g, '.png?size=2048');
+        const {body} = await snek.get(png);
+        //console.log(body)
+        //Canvas.registerFont(resolve(join(__dirname, './Minecrafter.ttf')), 'Minecraft');
+        let size = '42';
+        if(user.length >= 15) size = '35';
+        if(user.length >= 25) size = '30';
+        return new Canvas(1024, 578)
+          .setTextAlign('center')
+          .addImage(plate, 0, 0, 1024, 578)
+          //.restore()
+          .addImage(body, 392, 348, 205, 206)
+          .setTextFont(size+'pt')// Minecraft')
+          .addText(user, 512, 320)
+          .toBuffer()
+  }
+  const result = await getProfile(name, url);
+  //console.log(result)
+  response.send(result)
+})
 
 app.get("/fusioncraft/welcome*", async function (req, response) {
   const url = req.query.url
